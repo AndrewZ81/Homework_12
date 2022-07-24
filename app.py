@@ -31,23 +31,26 @@ def page_with_selected_posts():
 
 
 # Создаём маршрут для нового поста
-@app.route("/post", methods=["GET", "POST"])
+@app.route("/post", methods=["GET"])
 def page_post_form():
     """
     :return: Заполненный шаблон создания поста
     """
     return render_template("post_form.html")
 
-"""
+
 @app.route("/post", methods=["POST"])
 def page_post_upload():
-    pass
-"""
+    picture = request.files.get("picture")
+    picture.save(f"./uploads/images/{picture.filename}")
+    user_post = request.form.get("content")
+    return render_template("post_uploaded.html", user_post=user_post)
 
 
 # Создаём маршрут для каталога с пользовательскими загрузками
 @app.route("/uploads/<path:path>")
 def static_dir(path):
     return send_from_directory("uploads", path)
+
 
 app.run()
