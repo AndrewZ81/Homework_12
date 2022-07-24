@@ -1,12 +1,13 @@
 from flask import Flask, send_from_directory
-from main.main import main_blueprint
-# from functions import ...
+from main.main_page import main_page_blueprint
+from functions import load_posts
 
 POST_PATH = "posts.json"
 UPLOAD_FOLDER = "uploads/images"
 
 app = Flask(__name__)
-app.register_blueprint(main_blueprint)
+app.register_blueprint(main_page_blueprint)
+
 
 @app.route("/")
 def page_index():
