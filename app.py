@@ -1,17 +1,17 @@
-from flask import Flask, send_from_directory
-from main.main_page import main_page_blueprint
-from functions import load_posts
+# Импортируем необходимые инструменты из модуля flask
+from flask import Flask, render_template, send_from_directory
 
-POST_PATH = "posts.json"
-UPLOAD_FOLDER = "uploads/images"
+# Импортируем модуль functions для работы с форматом JSON
+import functions
 
 app = Flask(__name__)
-app.register_blueprint(main_page_blueprint)
-
 
 @app.route("/")
-def page_index():
-    pass
+def main_page():
+    """
+    :return: Заполненный шаблон главной страницы
+    """
+    return render_template("index.html")
 
 
 @app.route("/list")
