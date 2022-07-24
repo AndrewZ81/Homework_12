@@ -30,11 +30,15 @@ def page_with_selected_posts():
     return render_template("posts_list.html", _list=list_of_posts_for_output, key=key_for_search)
 
 
+# Создаём маршрут для нового поста
 @app.route("/post", methods=["GET", "POST"])
 def page_post_form():
-    pass
+    """
+    :return: Заполненный шаблон создания поста
+    """
+    return render_template("post_form.html")
 
-
+"""
 @app.route("/post", methods=["POST"])
 def page_post_upload():
     pass
@@ -43,6 +47,6 @@ def page_post_upload():
 @app.route("/uploads/<path:path>")
 def static_dir(path):
     return send_from_directory("uploads", path)
-
+"""
 
 app.run()
