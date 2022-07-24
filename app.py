@@ -42,11 +42,12 @@ def page_post_form():
 @app.route("/post", methods=["POST"])
 def page_post_upload():
     pass
+"""
 
 
+# Создаём маршрут для каталога с пользовательскими загрузками
 @app.route("/uploads/<path:path>")
 def static_dir(path):
     return send_from_directory("uploads", path)
-"""
 
 app.run()
