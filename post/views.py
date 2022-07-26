@@ -22,6 +22,11 @@ def page_post_form():
 @post_uploaded_blueprint.route("/post", methods=["POST"])
 def page_post_upload():
     picture = request.files.get("picture")
-    picture.save(f"./uploads/images/{picture.filename}")
-    user_post = request.form.get("content")
-    return render_template("post_uploaded.html", user_post=user_post, user_picture=picture.filename)
+    if picture:
+        picture.save(f"./uploads/images/{picture.filename}")
+        user_post = request.form.get("content")
+        return render_template("post_uploaded.html", user_post=user_post, user_picture=picture.filename)
+    else:
+        return f"<pre><link rel='stylesheet' href='/static/style.css'>" \
+               f"<p>Вы не загрузили файл. Вернитесь назад и попробуйте снова</p>" \
+               f"<a href='post' class='button'>Назад</a></pre>"
