@@ -5,10 +5,10 @@ from flask import Blueprint, render_template
 index_blueprint = Blueprint("index_blueprint", __name__, template_folder="templates")
 
 
-# Создаём эндпоинт для главной страницы
 @index_blueprint.route("/")
 def main_page():
     """
+    Создаёт эндпоинт для главной страницы
     :return: Заполненный шаблон главной страницы
     """
     return render_template("index.html")

@@ -2,27 +2,27 @@
 from flask import Blueprint, render_template, request
 
 # Подключаем инструменты модуля functions
-from functions import is_extension_allowed
+from functions import is_extension_allowed, save_post
 
 # Создаём блюпринты страниц создания нового поста и созданного поста, соответственно
 post_form_blueprint = Blueprint("post_form_blueprint", __name__, template_folder="templates")
 post_uploaded_blueprint = Blueprint("post_uploaded_blueprint", __name__, template_folder="templates")
 
 
-# Создаём эндпоинт страницы нового поста
 @post_form_blueprint.route("/post", methods=["GET"])
 def page_post_form():
     """
+    Создаёт эндпоинт страницы нового поста
     :return: Заполненный шаблон создания поста
     """
     return render_template("post_form.html")
 
 
-# Создаём эндпоинт страницы созданного поста
 @post_uploaded_blueprint.route("/post", methods=["POST"])
 def page_post_upload():
     """
-    :return: Заполненный шаблон созданного поста
+    Создаёт эндпоинт страницы загруженного поста
+    :return: Заполненный шаблон загруженного поста
     """
     picture = request.files.get("picture")
     if picture:
@@ -30,6 +30,7 @@ def page_post_upload():
         if is_extension_allowed(file_name):
             picture.save(f"./uploads/images/{picture.filename}")
             user_post = request.form.get("content")
+            save_post("posts.json", {'pic': f"./uploads/images/{picture.filename}", 'content': f"{user_post}"})
             return render_template("post_uploaded.html", user_post=user_post, user_picture=picture.filename)
         else:
             return f"<pre><link rel='stylesheet' href='/static/style.css'>" \

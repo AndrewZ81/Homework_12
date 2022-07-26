@@ -17,9 +17,9 @@ def page_with_selected_posts():
     key_for_search = request.args.get("s")
     if not key_for_search:
         return f"<pre><link rel='stylesheet' href='/static/style.css'>" \
-               f"<p>Вы не ввели текст для поиска. " \
-               f"Вернитесь назад и попробуйте снова</p>" \
-               f"<a href='/' class='button'>Назад</a></pre>"
+                f"<p>Вы не ввели текст для поиска. " \
+                f"Вернитесь назад и попробуйте снова</p>" \
+                f"<a href='/' class='button'>Назад</a></pre>"
     else:
         list_of_posts_for_output = []
         for i in load_posts("posts.json"):
