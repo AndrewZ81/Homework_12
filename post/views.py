@@ -21,6 +21,9 @@ def page_post_form():
 # Создаём эндпоинт страницы созданного поста
 @post_uploaded_blueprint.route("/post", methods=["POST"])
 def page_post_upload():
+    """
+    :return: Заполненный шаблон созданного поста
+    """
     picture = request.files.get("picture")
     if picture:
         file_name = picture.filename
@@ -30,10 +33,10 @@ def page_post_upload():
             return render_template("post_uploaded.html", user_post=user_post, user_picture=picture.filename)
         else:
             return f"<pre><link rel='stylesheet' href='/static/style.css'>" \
-                   f"<p>Расширение выбранного файла недопустимо." \
+                   f"<p>Расширение выбранного файла недопустимо. " \
                    f"Вернитесь назад и попробуйте снова</p>" \
-                   f"<a href='post' class='button'>Назад</a></pre>"
+                   f"<a href='/post' class='button'>Назад</a></pre>"
     else:
         return f"<pre><link rel='stylesheet' href='/static/style.css'>" \
                f"<p>Вы не загрузили файл. Вернитесь назад и попробуйте снова</p>" \
-               f"<a href='post' class='button'>Назад</a></pre>"
+               f"<a href='/post' class='button'>Назад</a></pre>"
